@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bookmark, Star, Clock, MapPin, ArrowRight, IndianRupee } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Destination } from '../types/trip';
 
 interface DestinationCardProps {
@@ -19,6 +20,7 @@ interface DestinationCardProps {
  * - Image Optimization (loading="lazy")
  * - ARIA Attribute Usage (aria-label, role)
  * - Component Reuse & Modularity
+ * - Animation Library: framer-motion (Motion Component)
  */
 export const DestinationCard: React.FC<DestinationCardProps> = ({
   destination,
@@ -27,7 +29,11 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
   onSelectDestination,
 }) => {
   return (
-    <article
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ y: -4 }}
       className="group relative bg-slate-900/80 rounded-2xl border border-slate-800 overflow-hidden hover:border-indigo-500/60 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between"
       aria-labelledby={`dest-title-${destination.id}`}
     >
@@ -157,6 +163,6 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
           </button>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };

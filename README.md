@@ -37,6 +37,10 @@
 
 ## 🏗️ Technical Architecture & Quality Standards
 
+- **State & Data Layer Architecture**: Centralized state store implemented via React Context API (`src/context/TripContext.tsx`) managing global filters, favorites, active view, and modal states.
+- **API & Service Abstraction Layer**: Clean service layer abstraction (`src/services/api.ts`) with client-side query caching, latency simulation, and robust search query filtering.
+- **Client Router Architecture**: Lightweight hash router navigation (`src/router/Router.tsx`) synchronizing views with browser URL history (`#explore`, `#saved`, `#calculator`).
+- **Animation & Motion**: Fluid micro-animations and spring transitions powered by `framer-motion` and `canvas-confetti`.
 - **Component Modularity**: High component reuse (`DestinationCard`, `Navbar`, `FilterBar`, `BudgetCalculatorSection`, `ShortlistDrawer`, `DestinationModal`, `Toast`, `ErrorBoundary`).
 - **React Hooks Architecture**: Encapsulated state and business logic using custom hooks:
   - `useFavorites`: Synchronizes shortlisted destinations with browser `localStorage`.
