@@ -1,168 +1,157 @@
 # 🧭 ESCAPE — Weekend Trip Planner
 
-> **“Your weekend. Your adventure.”**  
-> A modern, premium, and interactive weekend-trip planning frontend experience built with **HTML5, CSS3, Vanilla JavaScript, and Node.js**, designed and optimized for static deployment via **GitHub Pages**.
+> A visually appealing, high-performance static web application that allows travelers to quickly decide on, filter, and plan immersive 48-hour weekend getaways across India with zero backend or external API dependencies.
+
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.1-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![WCAG 2.1 AA](https://img.shields.io/badge/Accessibility-WCAG_2.1_AA-success?style=flat-square)](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ---
 
 ## 🌟 Overview
 
-**ESCAPE** is a client-side web application crafted to deliver an intuitive travel startup experience. It empowers users to discover handpicked weekend getaways across India, filter by their personal vibe and budget, explore detailed 48-hour day-by-day itineraries, and calculate realistic mock budgets according to their travel group size—all with zero external backend or API dependencies.
+**ESCAPE** is engineered to revolutionize the way weekend wanderers discover and select their next short-trip escape. Modern travelers often feel overwhelmed by endless travel blogs and unstructured forums. ESCAPE introduces an engaging and structured approach to weekend travel discovery:
+
+- **48-Hour Blueprints**: Curated hour-by-hour itineraries for Day 1 and Day 2 (Morning, Afternoon, Evening).
+- **Travel Vibe Discovery**: Effortlessly filter destinations by emotional travel vibe (Nature, Mountain, Beach, Heritage, Adventure, Romantic, Spiritual).
+- **Interactive Group Budgeting**: Real-time mock cost estimation scaling dynamically from solo explorers up to parties of 8.
+- **Persistent Shortlists**: Bookmark destinations to compare options and total combined budgets with instant `localStorage` persistence.
+- **Zero-API Architecture**: Operates 100% client-side with rich static datasets, ensuring blazing fast load times and offline readiness.
 
 ---
 
-## 🚀 Key Features
+## 🚀 Key Features & Blueprint Alignment
 
-### 1. 🎯 Interactive Preference & Vibe System
-- **7 Curated Travel Vibes:** Adventure ⛰️, Nature 🌿, Beach 🏖️, Romantic 💕, Food 🍜, Culture 🏛️, and Relaxation 🧘.
-- Interactive multi-select preference cards with real-time visual feedback and instant filtering.
-
-### 2. 🔍 Smart Trip-Planning & Search Interface
-- **Destination Autocomplete:** Type to search with instant dropdown suggestions highlighting name, state, and pricing.
-- **Budget Filters:** Under ₹5,000, ₹5,000–₹10,000, ₹10,000–₹20,000, and ₹20,000+.
-- **Duration Selectors:** 1 Day, 2 Days (Weekend), 3 Days (Long Weekend).
-- **Traveler Group Stepper:** Interactive count adjuster & traveler type selector (Solo, Couple, Friends, Family).
-- **Sort Options:** Popularity, Price (Low to High), Price (High to Low), and Highest Rating.
-- **Active Filter Chips:** Removable chips with one-click "Clear All" functionality.
-
-### 3. 🗺️ Destination Cards & Curated Sections
-- **Rich Destination Cards:** High-resolution destination photography, category pills, rating stars, duration badges, price per person, heart favorite button, and smooth hover elevation.
-- **“Weekend escapes you'll love”:** The main dynamic destination gallery with empty state handling.
-- **“Under ₹10K”:** Horizontal carousel featuring budget-friendly trips.
-- **“Quick weekend escapes”:** 1–2 day trips for spontaneous weekenders.
-- **“Hidden gems”:** Editorial cards for off-the-beaten-path destinations like Jibhi and Hampi.
-
-### 4. 📖 Detailed Destination Experience (`destination.html`)
-- **Full-Bleed Hero Banner:** Scenic photography, quick-info meta pills, ratings, and save button.
-- **Tabbed Interface:**
-  - **Overview & Highlights:** Comprehensive background, trip highlights checklist, and activity cards with duration & cost tags.
-  - **Day-by-Day Itinerary:** Structured 48-hour timeline divided into Morning 🌅, Afternoon ☀️, and Evening 🌙 slots with time tags.
-  - **Interactive Mock Budget Calculator:** Dynamic recalculation of Accommodation, Food, Transportation, and Activities with a stacked visual percentage bar based on traveler type (Solo, Couple, Friends, Family).
-  - **Traveler Reviews:** Score cards and verified community feedback.
-- **Sticky Booking Sidebar:** Real-time calculated estimate, simulated booking action, and URL sharing with toast notifications.
-
-### 5. ❤️ Favorites & Saved Trips (`favorites.html`)
-- Persistent bookmarking using browser `localStorage` (no server or database needed).
-- Real-time navbar badge counter synchronization across all pages.
-- Dedicated favorites hub with empty state and a "Clear All Saved" confirmation workflow.
+| Requirement | Implementation Details |
+| :--- | :--- |
+| **REQ-DESTINATION-DISCOVERY** | Catalog of 10+ getaways across India (Goa, Coorg, Munnar, Udaipur, Hampi, Pondicherry, Kodaikanal, Wayanad, Jibhi, Alleppey) featuring high-resolution imagery, travel vibe tags, estimated cost per person, and quick highlights. |
+| **REQ-DESTINATION-DETAILS** | Interactive modal powered by `React.lazy()` featuring complete 48-hour day-by-day itineraries, interactive group cost calculator, packing essentials checklist, and verified traveler reviews. |
+| **REQ-SEARCH-FILTER** | Real-time search bar with Ctrl+K shortcut, multi-vibe filter pills, dynamic budget slider (₹3k–₹25k), and sorting by Recommended, Rating, Price (Asc/Desc), and Duration. |
+| **REQ-SHORTLIST** | Persistent shortlisted trip drawer with bookmark toggling, celebratory confetti micro-interaction, itemized removal, and combined budget summation. |
+| **REQ-RESPONSIVE-UI** | Mobile-first architecture using Tailwind CSS utilities (`sm:`, `md:`, `lg:`, `xl:`, `flex-col md:flex-row`), accessible navigation drawer, and 44px minimum touch targets. |
+| **REQ-VISUAL-DESIGN** | Sleek glassmorphism aesthetic, dark mode color palette (`#0B0F19`), Google Font typography (`Plus Jakarta Sans`), and accessible WCAG 2.1 AA contrast ratios. |
 
 ---
 
-## 📱 Full Responsive Optimization
+## 🏗️ Technical Architecture & Quality Standards
 
-Intelligently adapts across all device categories using CSS Flexbox, Grid, and fluid `clamp()` typography:
-
-| Screen Category | Tested Breakpoints | Adaptation Strategy |
-|---|---|---|
-| **Mobile Phones** | `320px`, `375px`, `390px`, `414px` | Full-screen mobile drawer, 1-column card stack, touch-friendly 44px+ touch targets, stacked search inputs |
-| **Tablets Portrait** | `768px`, `820px` | 2-column search grid, 2-column card layout, swipeable horizontal carousels |
-| **Tablets Landscape & Laptops** | `1024px`, `1280px` | Side-by-side trip planner, 2–3 column grids, sticky tab navigation |
-| **Desktops & Wide Displays** | `1440px`, `1920px+` | Max-width containers (1400px), 3–4 column grids, sticky sidebar summaries |
-
----
-
-## 🛠️ Technology Stack
-
-- **Markup:** HTML5 (Semantic elements: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`)
-- **Styling:** CSS3 (Custom properties / CSS variables, Grid, Flexbox, Keyframe animations, Glassmorphism)
-- **Logic:** Vanilla JavaScript (ES6+, DOM Manipulation, LocalStorage API, CustomEvents, IntersectionObserver)
-- **Tooling:** Node.js (Used exclusively for local development static serving)
-- **Hosting:** GitHub Pages compatible (Pure static files, relative paths, `.nojekyll` included)
+- **Component Modularity**: High component reuse (`DestinationCard`, `Navbar`, `FilterBar`, `BudgetCalculatorSection`, `ShortlistDrawer`, `DestinationModal`, `Toast`, `ErrorBoundary`).
+- **React Hooks Architecture**: Encapsulated state and business logic using custom hooks:
+  - `useFavorites`: Synchronizes shortlisted destinations with browser `localStorage`.
+  - `useSearchFilter`: High-performance search, multi-tag vibe filtering, and sorting powered by `useMemo`.
+  - `useBudgetCalculator`: Dynamic itemized group cost scaling (accommodation, food, transport, activities).
+- **Performance Optimization**:
+  - Dynamic code splitting via `React.lazy()` and `Suspense` for modal and drawer components.
+  - Image optimization with `loading="lazy"` attributes and graceful image fallbacks.
+  - Render memoization with `useCallback` and `useMemo`.
+  - Manual vendor chunk splitting in Vite (`vendor`, `icons`).
+- **Semantic HTML & Accessibility**:
+  - Full semantic tree: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`.
+  - Heading progression: Strict `<h1>` hierarchy progressing to `<h2>`, `<h3>`, and `<h4>`.
+  - Comprehensive ARIA labeling (`role="dialog"`, `aria-modal="true"`, `aria-label`, `aria-expanded`).
+  - Accessible form controls (`<label>`, `<input>`, `<select>`).
 
 ---
 
-## 🗂️ Project Structure
+## 💻 Installation & Execution Guide
 
-```
-frontendarena mock test/
-├── .nojekyll                 # Bypasses Jekyll on GitHub Pages
-├── index.html                # Main landing page & search hub
-├── destination.html          # Destination detail & itinerary page
-├── favorites.html            # Saved trips & bookmarks hub
-├── README.md                 # Project documentation & setup
-├── css/
-│   ├── variables.css         # Design tokens (colors, typography, spacing)
-│   ├── reset.css             # Modern CSS reset & accessibility rules
-│   ├── animations.css        # Keyframe animations & transitions
-│   ├── style.css             # Core application & component styles
-│   └── responsive.css        # Multi-breakpoint media queries
-├── js/
-│   ├── data.js               # 100% Local mock dataset
-│   ├── ui.js                 # Reusable UI helpers (toasts, currency, stars)
-│   ├── favorites.js          # localStorage favorites management
-│   ├── search.js             # Filter, search, sort, and card rendering engine
-│   ├── destination.js        # Detail page tabs & budget calculator logic
-│   └── app.js                # Landing page controller & interactions
-└── assets/
-    └── images/               # High-res destination & hero photography
-        ├── hero-bg.jpg
-        ├── munnar.jpg
-        ├── goa.jpg
-        ├── coorg.jpg
-        ├── wayanad.jpg
-        ├── hampi.jpg
-        ├── pondicherry.jpg
-        ├── udaipur.jpg
-        ├── alleppey.jpg
-        ├── jibhi.jpg
-        └── kodaikanal.jpg
-```
+### Prerequisites
+- [Node.js](https://nodejs.org/) (version 18.0 or higher recommended)
+- [npm](https://www.npmjs.com/) (version 9.0 or higher)
 
----
-
-## 💻 Local Setup & Development
-
-Because ESCAPE is built purely with standard web technologies, **no build step or compiler is required**.
-
-### Option A: Using Node.js (Recommended)
-You can use any zero-config Node.js static server:
+### Step 1: Clone the Repository
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/escape-weekend-planner.git
-cd escape-weekend-planner
-
-# Serve using npx
-npx serve .
+git clone https://github.com/NSG-LAB/ESCAPE-Weekend-Trip-Planner.git
+cd ESCAPE-Weekend-Trip-Planner
 ```
-Then open `http://localhost:3000` in your browser.
 
-### Option B: Direct Browser Open
-Simply double-click `index.html` or open it directly in Google Chrome, Firefox, Safari, or Microsoft Edge.
+### Step 2: Install Dependencies
+```bash
+npm install
+```
 
----
+### Step 3: Run Development Server
+```bash
+npm run dev
+```
+Open your browser at `http://localhost:5173` to explore the application locally.
 
-## 🌐 GitHub Pages Deployment Instructions
+### Step 4: Build for Production
+```bash
+npm run build
+```
+This runs `tsc` for strict type checking and builds the production bundle into the `dist/` directory.
 
-1. **Push code to GitHub:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: ESCAPE Weekend Trip Planner"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo-name>.git
-   git push -u origin main
-   ```
-
-2. **Configure GitHub Pages:**
-   - Go to your repository on GitHub.
-   - Click **Settings** → **Pages** (in the left sidebar under "Code and automation").
-   - Under **Build and deployment** → **Source**, select **Deploy from a branch**.
-   - Under **Branch**, select `main` (or `gh-pages`) and choose `/ (root)`.
-   - Click **Save**.
-
-3. **Verify Deployment:**
-   - Wait 1–2 minutes for GitHub Actions to complete the deployment.
-   - Your site will be live at: `https://<your-username>.github.io/<your-repo-name>/`
-   - *Note:* The repository includes a `.nojekyll` file and uses relative paths (`./css/...`, `./assets/...`) to ensure proper asset resolution on GitHub Pages.
+### Step 5: Preview Production Build
+```bash
+npm run preview
+```
 
 ---
 
-## ℹ️ Mock Data Disclaimer
+## ⚙️ Environment Configuration
 
-All destinations, itineraries, pricing, budgets, ratings, and traveler reviews displayed in this project are **fictional and simulated mock data**. The application does **NOT** connect to external APIs (Google Maps, TripAdvisor, booking portals, payment gateways, or live weather services). It is designed strictly as a high-fidelity frontend portfolio project.
+The application is configured to run out-of-the-box with default values. To customize settings, copy the `.env.example` template:
+
+```bash
+cp .env.example .env
+```
+
+### Available Variables
+
+| Variable | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `VITE_APP_TITLE` | String | `"ESCAPE — Weekend Trip Planner"` | Main application name displayed in header & meta tags |
+| `VITE_ENABLE_MOCK_DATA` | Boolean | `true` | Toggles static offline mock dataset |
+| `VITE_DEFAULT_CURRENCY` | String | `"₹"` | Currency symbol used across trip expense estimators |
+| `VITE_DEFAULT_DURATION_HOURS` | Number | `48` | Default standard duration for weekend trip itineraries |
 
 ---
 
-## 📄 License
+## 📁 Project Directory Structure
 
-Created for demonstration and portfolio review. Open source under the [MIT License](LICENSE).
+```
+├── .env.example              # Template environment configuration
+├── .github/workflows/        # Automated GitHub Actions deployment workflow
+├── dist/                     # Optimized production bundle
+├── public/
+│   └── assets/               # Static destination photos and hero artwork
+├── src/
+│   ├── components/           # Modular UI components
+│   │   ├── BudgetCalculator.tsx
+│   │   ├── DestinationCard.tsx
+│   │   ├── DestinationModal.tsx
+│   │   ├── ErrorBoundary.tsx
+│   │   ├── FilterBar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ShortlistDrawer.tsx
+│   │   └── Toast.tsx
+│   ├── data/                 # Static mock dataset for destinations & vibes
+│   │   └── destinations.ts
+│   ├── hooks/                # Custom React hooks
+│   │   ├── useBudgetCalculator.ts
+│   │   ├── useFavorites.ts
+│   │   └── useSearchFilter.ts
+│   ├── types/                # Strict TypeScript type definitions
+│   │   └── trip.ts
+│   ├── App.tsx               # Root application coordinator
+│   ├── index.css             # Tailwind base and custom utilities
+│   └── main.tsx              # React DOM entrypoint
+├── index.html                # Preloaded web fonts & semantic markup
+├── package.json              # Project dependencies and npm scripts
+├── postcss.config.js         # PostCSS configuration
+├── tailwind.config.js        # Tailwind styling theme & animations
+├── tsconfig.json             # Strict TypeScript compiler options
+└── vite.config.ts            # Vite build and chunking configuration
+```
+
+---
+
+## 👥 Authors & License
+
+Created for the **Frontend Arena Hackathon**.
+Distributed under the MIT License.
