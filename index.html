@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ESCAPE — Discover curated weekend getaways across India. Handpicked destinations, tailored itineraries, and interactive mock budget estimates for solo travelers, couples, and friends.">
+  <meta name="keywords" content="weekend trip planner, getaways, travel India, Munnar, Goa, Coorg, Hampi, Pondicherry, itineraries">
+  <meta name="theme-color" content="#0D1117">
+  <title>ESCAPE — Weekend Trip Planner | Your Weekend. Your Adventure.</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="ESCAPE — Weekend Trip Planner">
+  <meta property="og:description" content="Your weekend. Your adventure. Discover handpicked getaways, tailored 48-hour itineraries, and interactive mock budgets.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/hero-bg.jpg">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Header / Navigation
+       ======================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo" aria-label="ESCAPE Homepage">
+        <span>ESC<span class="brand-highlight">A</span>PE</span>
+        <span class="brand-badge">Weekend Planner</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#hero-section" class="nav-link active">Home</a>
+        <a href="#vibe-section" class="nav-link">Pick Vibe</a>
+        <a href="#escapes-section" class="nav-link">Discover</a>
+        <a href="#under-10k-section" class="nav-link">Under ₹10K</a>
+        <a href="#how-it-works-section" class="nav-link">How It Works</a>
+        <a href="favorites.html" class="nav-link nav-badge-wrap" aria-label="Saved trips">
+          <span>Favorites</span>
+          <span class="fav-counter-badge" id="fav-badge" aria-label="Saved trips count">0</span>
+        </a>
+      </nav>
+
+      <div class="navbar-actions">
+        <a href="#escapes-section" class="btn btn-primary btn-sm">Plan Trip</a>
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="brand-logo">
+        <span>ESC<span class="brand-highlight">A</span>PE</span>
+      </div>
+      <button type="button" class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close navigation menu">&times;</button>
+    </div>
+    <nav class="mobile-drawer-nav">
+      <a href="#hero-section" class="drawer-nav-link">Home</a>
+      <a href="#vibe-section" class="drawer-nav-link">Pick Your Vibe</a>
+      <a href="#escapes-section" class="drawer-nav-link">Explore Destinations</a>
+      <a href="#under-10k-section" class="drawer-nav-link">Under ₹10K Escapes</a>
+      <a href="#hidden-gems-section" class="drawer-nav-link">Hidden Gems</a>
+      <a href="#how-it-works-section" class="drawer-nav-link">How It Works</a>
+      <a href="favorites.html" class="drawer-nav-link">
+        <span>Saved Favorites</span>
+        <span class="fav-counter-badge" style="display:inline-flex;">0</span>
+      </a>
+      <div style="margin-top: 1.5rem;">
+        <a href="#escapes-section" class="btn btn-primary" style="width: 100%;">Find a Weekend Trip</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         Hero Section with Integrated Trip-Planner
+         ====================================================================== -->
+    <section class="hero-section" id="hero-section" style="background-image: url('assets/images/hero-bg.jpg');">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-pill-badge">
+            <span>✨</span> Curated 48-Hour Weekend Adventures
+          </div>
+          <h1 class="hero-title">
+            Your weekend.<br>
+            <span class="title-accent">Your adventure.</span>
+          </h1>
+          <p class="hero-desc">
+            Stop endlessly scrolling. Discover handpicked weekend getaways across India with day-by-day itineraries and realistic mock budgets tailored to your travel style.
+          </p>
+        </div>
+
+        <!-- Quick Trip-Planning / Search Interface -->
+        <div class="trip-planner-bar" id="trip-planner-bar">
+          <form class="planner-form-grid" id="hero-search-form" action="#escapes-section">
+            
+            <!-- Col 1: Destination with Autocomplete -->
+            <div class="planner-col">
+              <label for="search-input" class="planner-label">
+                <span>📍</span> Where to?
+              </label>
+              <div class="planner-input-wrap">
+                <input 
+                  type="text" 
+                  id="search-input" 
+                  class="planner-input" 
+                  placeholder="e.g. Munnar, Goa, Hampi..." 
+                  autocomplete="off"
+                  aria-label="Destination search query"
+                />
+              </div>
+              <div class="autocomplete-dropdown" id="search-autocomplete" role="listbox"></div>
+            </div>
+
+            <!-- Col 2: When / Weekend -->
+            <div class="planner-col">
+              <label for="trip-when" class="planner-label">
+                <span>📅</span> When?
+              </label>
+              <select id="trip-when" class="planner-select" aria-label="Select weekend">
+                <option value="this-weekend">This Weekend</option>
+                <option value="next-weekend">Next Weekend</option>
+                <option value="long-weekend">Upcoming Long Weekend</option>
+                <option value="anytime" selected>Anytime</option>
+              </select>
+            </div>
+
+            <!-- Col 3: Budget Range -->
+            <div class="planner-col">
+              <label for="filter-budget" class="planner-label">
+                <span>💰</span> Budget Range
+              </label>
+              <select id="filter-budget" class="planner-select" aria-label="Select budget range">
+                <option value="">Any Budget</option>
+                <option value="under-5k">Under ₹5,000</option>
+                <option value="5k-10k">₹5,000 – ₹10,000</option>
+                <option value="10k-20k">₹10,000 – ₹20,000</option>
+                <option value="20k-plus">₹20,000+</option>
+              </select>
+            </div>
+
+            <!-- Col 4: Travelers Stepper & Type -->
+            <div class="planner-col">
+              <label class="planner-label">
+                <span>👥</span> Travelers
+              </label>
+              <div class="travelers-stepper">
+                <button type="button" class="stepper-btn" id="travelers-minus" aria-label="Decrease traveler count">−</button>
+                <span class="stepper-count" id="travelers-count">2</span>
+                <button type="button" class="stepper-btn" id="travelers-plus" aria-label="Increase traveler count">+</button>
+                <select id="travelers-type" class="planner-select" style="max-width: 90px; margin-left: 6px;" aria-label="Traveler type">
+                  <option value="solo">Solo</option>
+                  <option value="couple" selected>Couple</option>
+                  <option value="friends">Friends</option>
+                  <option value="family">Family</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Col 5: Submit Search Button -->
+            <div class="planner-btn-col">
+              <button type="submit" class="btn btn-primary" id="btn-hero-search" aria-label="Search weekend trips">
+                <span>Search</span>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="btn-arrow" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         "Pick your vibe" Preference System
+         ====================================================================== -->
+    <section class="section-padding vibes-section" id="vibe-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Preferences</span>
+          <h2 class="section-title">Pick your vibe</h2>
+          <p class="section-subtitle">
+            What kind of weekend are you dreaming of? Select one or more vibes to instantly filter suitable getaways.
+          </p>
+        </div>
+
+        <div class="vibe-grid" id="vibe-selector-grid" role="group" aria-label="Select getaway vibe preferences">
+          <!-- Dynamically populated from data.js -->
+        </div>
+
+        <div class="vibes-actions-bar">
+          <span style="font-size: var(--fs-small); color: var(--text-muted);">
+            💡 Multiple vibes can be combined for tailored results.
+          </span>
+          <button type="button" class="btn btn-outline btn-sm" id="btn-vibe-explore">
+            Explore Matching Escapes ↓
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Main Results: "Weekend escapes you'll love"
+         ====================================================================== -->
+    <section class="section-padding" id="escapes-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Curated Getaways</span>
+          <h2 class="section-title">Weekend escapes you'll love</h2>
+          <p class="section-subtitle">
+            Every destination includes 48-hour activity plans, travel highlights, and transparent mock budgets.
+          </p>
+        </div>
+
+        <!-- Filter Controls Bar -->
+        <div class="escapes-toolbar">
+          <div class="toolbar-filters">
+            <!-- Duration Filter -->
+            <div class="toolbar-select-wrap">
+              <label for="filter-duration" class="sr-only">Filter by duration</label>
+              <select id="filter-duration" class="toolbar-select">
+                <option value="">All Durations</option>
+                <option value="1-day">1 Day Trip</option>
+                <option value="2-days">2 Days (Weekend)</option>
+                <option value="3-days">3 Days (Long Weekend)</option>
+              </select>
+            </div>
+
+            <!-- Sort Selector -->
+            <div class="toolbar-select-wrap">
+              <label for="sort-by" class="sr-only">Sort destinations</label>
+              <select id="sort-by" class="toolbar-select">
+                <option value="popular">Sort: Most Popular</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+
+            <!-- Clear Button -->
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-filters">
+              Reset Filters
+            </button>
+          </div>
+
+          <div class="results-count-badge" id="results-count" aria-live="polite">
+            Showing all getaways
+          </div>
+        </div>
+
+        <!-- Active Filter Chips Bar -->
+        <div class="active-filter-chips" id="active-filter-chips" style="display: none;"></div>
+
+        <!-- Destination Cards Grid -->
+        <div class="destinations-grid" id="destinations-grid" aria-live="polite">
+          <!-- Dynamically populated by search.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Curated Collection: "Under ₹10K"
+         ====================================================================== -->
+    <section class="section-padding" id="under-10k-section" style="background: var(--bg-surface); border-top: 1px solid var(--border-default);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Pocket Friendly</span>
+          <h2 class="section-title">Under ₹10K</h2>
+          <p class="section-subtitle">
+            Unbelievable weekend getaways that won't burn a hole in your pocket. Full travel, stay and food under 10k!
+          </p>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="compact-cards-row" id="under-10k-grid">
+            <!-- Populated from data.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Curated Collection: "Quick weekend escapes" (1–2 Days)
+         ====================================================================== -->
+    <section class="section-padding" id="quick-escapes-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Zero Hassle</span>
+          <h2 class="section-title">Quick weekend escapes</h2>
+          <p class="section-subtitle">
+            Need to leave Friday evening and be back by Sunday night? These short-duration trips maximize every hour.
+          </p>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="compact-cards-row" id="quick-escapes-grid">
+            <!-- Populated from data.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Curated Collection: "Hidden gems"
+         ====================================================================== -->
+    <section class="section-padding" id="hidden-gems-section" style="background: var(--bg-surface); border-top: 1px solid var(--border-default);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Off The Beaten Path</span>
+          <h2 class="section-title">Hidden gems</h2>
+          <p class="section-subtitle">
+            Skip the tourist swarms. Explore serene hamlets, ancient ruins, and misty valleys that few know about.
+          </p>
+        </div>
+
+        <div class="gems-grid" id="hidden-gems-grid">
+          <!-- Populated from data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         "How It Works" Section
+         ====================================================================== -->
+    <section class="section-padding" id="how-it-works-section">
+      <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+          <span class="section-tag">Effortless Planning</span>
+          <h2 class="section-title">How ESCAPE Works</h2>
+          <p class="section-subtitle">
+            From Friday impulse to Monday morning memories in three simple steps.
+          </p>
+        </div>
+
+        <div class="how-it-works-grid">
+          <div class="how-card hover-lift">
+            <div class="how-step-num">01</div>
+            <div class="how-icon">🎯</div>
+            <h3 class="how-title">Pick Your Vibe & Budget</h3>
+            <p class="how-desc">
+              Choose whether you crave quiet nature, beach sunsets, or adrenaline. Set your estimated budget and traveler group size.
+            </p>
+          </div>
+
+          <div class="how-card hover-lift">
+            <div class="how-step-num">02</div>
+            <div class="how-icon">🗺️</div>
+            <h3 class="how-title">Explore 48-Hour Plans</h3>
+            <p class="how-desc">
+              Browse tailored day-by-day itineraries with morning, afternoon, and evening activity slots so you never waste time wondering what's next.
+            </p>
+          </div>
+
+          <div class="how-card hover-lift">
+            <div class="how-step-num">03</div>
+            <div class="how-icon">🎒</div>
+            <h3 class="how-title">Calculate & Save Your Trip</h3>
+            <p class="how-desc">
+              Inspect transparent mock budget breakdowns for food, stay, transport, and activities. Save your favorite trips with one click!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Newsletter / Call To Action Banner
+         ====================================================================== -->
+    <section class="section-padding" style="padding-top: 0;">
+      <div class="container">
+        <div class="newsletter-banner">
+          <span class="section-tag">Stay Inspired</span>
+          <h2 class="newsletter-title">Ready for your next weekend escape?</h2>
+          <p class="newsletter-sub">
+            Get curated 48-hour weekend getaway ideas delivered to your inbox every Thursday afternoon.
+          </p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input 
+              type="email" 
+              class="newsletter-input" 
+              id="newsletter-email" 
+              placeholder="Enter your email address..." 
+              required 
+              aria-label="Email address for travel newsletter"
+            />
+            <button type="submit" class="btn btn-primary">
+              Subscribe Free
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       Footer
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span>ESC<span class="brand-highlight">A</span>PE</span>
+          </div>
+          <p>
+            Your ultimate weekend travel companion. Curated getaways, transparent mock budgets, and 48-hour itineraries across India.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <div class="footer-links">
+            <a href="destination.html?id=munnar">Munnar, Kerala</a>
+            <a href="destination.html?id=goa">Goa Beaches</a>
+            <a href="destination.html?id=coorg">Coorg Coffee Trails</a>
+            <a href="destination.html?id=hampi">Hampi Heritage</a>
+            <a href="destination.html?id=pondicherry">Pondicherry French Town</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Vibes</h4>
+          <div class="footer-links">
+            <a href="#vibe-section">Nature & Mountains</a>
+            <a href="#vibe-section">Beach Getaways</a>
+            <a href="#vibe-section">Heritage & Culture</a>
+            <a href="#vibe-section">Food & Culinary</a>
+            <a href="#under-10k-section">Under ₹10,000</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>About ESCAPE</h4>
+          <div class="footer-links">
+            <a href="favorites.html">Saved Trips</a>
+            <a href="#how-it-works-section">How It Works</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+            <span style="color: var(--text-muted); font-size: var(--fs-caption); margin-top: 8px;">
+              Mock Demonstration Project
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 ESCAPE — Weekend Trip Planner. All rights reserved.</span>
+        <span>Built with HTML5, CSS3 & Vanilla JavaScript. Hosted on GitHub Pages.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button type="button" class="btn-scroll-top" id="btn-scroll-top" aria-label="Scroll back to top">
+    <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+  </button>
+
+  <!-- Core Scripts in Dependency Order -->
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

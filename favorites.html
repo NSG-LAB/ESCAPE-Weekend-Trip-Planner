@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View your saved weekend escapes on ESCAPE. Manage your favorites and plan your dream weekend getaway.">
+  <meta name="theme-color" content="#0D1117">
+  <title>Saved Trips & Favorites — ESCAPE</title>
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Header / Navigation
+       ======================================================================== -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo" aria-label="ESCAPE Homepage">
+        <span>ESC<span class="brand-highlight">A</span>PE</span>
+        <span class="brand-badge">Weekend Planner</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#vibe-section" class="nav-link">Pick Vibe</a>
+        <a href="index.html#escapes-section" class="nav-link">Discover</a>
+        <a href="index.html#under-10k-section" class="nav-link">Under ₹10K</a>
+        <a href="favorites.html" class="nav-link active nav-badge-wrap" aria-label="Saved trips">
+          <span>Favorites</span>
+          <span class="fav-counter-badge" id="fav-badge">0</span>
+        </a>
+      </nav>
+
+      <div class="navbar-actions">
+        <a href="index.html#escapes-section" class="btn btn-primary btn-sm">Find More Trips</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Content: Favorites Hub
+       ======================================================================== -->
+  <main class="container section-padding" style="padding-top: calc(var(--navbar-height) + var(--space-8)); min-height: 80vh;">
+    
+    <div class="fav-header-bar">
+      <div>
+        <span class="section-tag">Personal Collection</span>
+        <h1 class="section-title">My Saved Weekend Trips</h1>
+        <p class="section-subtitle" id="fav-status-subtitle">
+          Your bookmarked getaways stored locally on this browser.
+        </p>
+      </div>
+
+      <div id="fav-actions" style="display: none;">
+        <button type="button" class="btn btn-outline btn-sm" id="btn-clear-favorites" style="color: var(--color-error); border-color: rgba(248, 81, 73, 0.4);">
+          Clear All Saved
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards Grid / Empty State -->
+    <div class="destinations-grid" id="favorites-grid" aria-live="polite">
+      <!-- Populated dynamically by JS -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <span>&copy; 2026 ESCAPE — Weekend Trip Planner. All rights reserved.</span>
+        <a href="index.html" style="color: var(--accent-primary);">← Back to Homepage</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      FavoritesManager.init();
+      renderFavoritesPage();
+
+      // Listen for changes
+      window.addEventListener("escape:favorites-changed", () => {
+        renderFavoritesPage();
+      });
+
+      const clearBtn = document.getElementById("btn-clear-favorites");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          if (confirm("Are you sure you want to remove all saved trips?")) {
+            FavoritesManager.clearAll();
+          }
+        });
+      }
+    });
+
+    function renderFavoritesPage() {
+      const container = document.getElementById("favorites-grid");
+      const actions = document.getElementById("fav-actions");
+      const subtitle = document.getElementById("fav-status-subtitle");
+      if (!container) return;
+
+      const favs = FavoritesManager.getFavoriteDestinations();
+
+      if (favs.length === 0) {
+        if (actions) actions.style.display = "none";
+        if (subtitle) subtitle.textContent = "You haven't saved any weekend getaways yet.";
+        container.innerHTML = `
+          <div class="empty-state-box">
+            <div class="empty-icon">🤍</div>
+            <h2 class="empty-title">No saved trips yet</h2>
+            <p class="empty-desc">Explore our curated collection of weekend getaways and click the heart icon on any trip you'd like to save for later.</p>
+            <a href="index.html#escapes-section" class="btn btn-primary">
+              Discover Destinations
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      if (actions) actions.style.display = "block";
+      if (subtitle) subtitle.textContent = `You have ${favs.length} saved weekend ${favs.length === 1 ? 'trip' : 'trips'} ready to plan!`;
+
+      container.innerHTML = favs.map(dest => SearchEngine.renderCardHTML(dest)).join("");
+    }
+  </script>
+</body>
+</html>

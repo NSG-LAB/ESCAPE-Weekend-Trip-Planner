@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore detailed 48-hour weekend itineraries, travel highlights, and interactive mock budgets on ESCAPE.">
+  <meta name="theme-color" content="#0D1117">
+  <title>Weekend Destination Detail — ESCAPE</title>
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Header / Navigation
+       ======================================================================== -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo" aria-label="ESCAPE Homepage">
+        <span>ESC<span class="brand-highlight">A</span>PE</span>
+        <span class="brand-badge">Weekend Planner</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#vibe-section" class="nav-link">Pick Vibe</a>
+        <a href="index.html#escapes-section" class="nav-link">Discover</a>
+        <a href="index.html#under-10k-section" class="nav-link">Under ₹10K</a>
+        <a href="favorites.html" class="nav-link nav-badge-wrap" aria-label="Saved trips">
+          <span>Favorites</span>
+          <span class="fav-counter-badge" id="fav-badge">0</span>
+        </a>
+      </nav>
+
+      <div class="navbar-actions">
+        <a href="index.html#escapes-section" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="btn-arrow-left" aria-hidden="true"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+          All Escapes
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Content: Destination Details App
+       ======================================================================== -->
+  <main id="destination-detail-app">
+    
+    <!-- Hero Banner (Populated by destination.js) -->
+    <section class="dest-hero" id="dest-hero-bg">
+      <div class="dest-hero-overlay" aria-hidden="true"></div>
+      
+      <div class="container dest-hero-content">
+        <a href="index.html#escapes-section" class="btn btn-ghost btn-sm" style="margin-bottom: var(--space-4); color: #C9D1D9;">
+          ← Back to all escapes
+        </a>
+
+        <div class="dest-hero-header">
+          <div class="dest-title-group">
+            <div id="dest-category-tags" class="dest-category-tags" style="display: flex; gap: 8px; margin-bottom: 8px;"></div>
+            <h1 id="dest-title">Loading Destination...</h1>
+            <p id="dest-tagline" style="font-size: var(--fs-body-lg); color: #C9D1D9; max-width: 680px;"></p>
+            
+            <div class="dest-meta-chips">
+              <span class="dest-meta-pill">📍 <span id="dest-location"></span></span>
+              <span class="dest-meta-pill">⏱️ <span id="dest-duration"></span></span>
+              <span class="dest-meta-pill">🗓️ Best time: <span id="dest-best-time"></span></span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+            <div id="dest-rating-stars" class="dest-hero-rating"></div>
+            <button 
+              type="button" 
+              class="fav-btn" 
+              id="dest-hero-fav-btn" 
+              style="position: static; width: 44px; height: 44px;"
+              title="Save to favorites"
+              aria-label="Toggle favorite"
+            >
+              <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 22px; height: 22px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content & Sticky Sidebar Container -->
+    <div class="container section-padding" style="padding-top: var(--space-6);">
+      
+      <!-- Tab Navigation -->
+      <nav class="detail-tab-nav" aria-label="Destination Sections Navigation">
+        <button type="button" class="tab-btn active" data-tab="overview" aria-selected="true">
+          📖 Overview & Highlights
+        </button>
+        <button type="button" class="tab-btn" data-tab="itinerary" aria-selected="false">
+          📅 Day-by-Day Itinerary
+        </button>
+        <button type="button" class="tab-btn" data-tab="budget" aria-selected="false">
+          💰 Mock Budget Breakdown
+        </button>
+        <button type="button" class="tab-btn" data-tab="reviews" aria-selected="false">
+          ⭐ Traveler Reviews
+        </button>
+      </nav>
+
+      <!-- Layout Grid (Content + Sticky Sidebar) -->
+      <div class="detail-layout-grid">
+        
+        <!-- Left Column: Tab Panels -->
+        <div class="detail-main-panels">
+          
+          <!-- Tab 1: Overview -->
+          <div class="tab-panel active" id="tab-panel-overview">
+            <h2 class="sr-only">Destination Overview</h2>
+            <p class="overview-prose" id="dest-full-desc"></p>
+
+            <div class="highlights-box">
+              <h3>✨ Trip Highlights</h3>
+              <ul class="highlights-list" id="dest-highlights-list"></ul>
+            </div>
+
+            <div style="margin-bottom: var(--space-6);">
+              <h3 style="margin-bottom: var(--space-3);">🎯 Ideal For</h3>
+              <div id="dest-ideal-for" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+            </div>
+
+            <div>
+              <h3>🎒 Popular Weekend Activities</h3>
+              <div class="activities-grid" id="dest-activities-grid"></div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Day-by-Day Itinerary -->
+          <div class="tab-panel" id="tab-panel-itinerary">
+            <div style="margin-bottom: var(--space-6);">
+              <h2>48-Hour Weekend Itinerary</h2>
+              <p style="color: var(--text-secondary);">
+                Carefully timed to ensure you soak in the best viewpoints, authentic food, and key attractions without feeling rushed.
+              </p>
+            </div>
+            <div class="itinerary-timeline" id="itinerary-timeline"></div>
+          </div>
+
+          <!-- Tab 3: Mock Budget Breakdown -->
+          <div class="tab-panel" id="tab-panel-budget">
+            <div style="margin-bottom: var(--space-6);">
+              <h2>Interactive Mock Budget Calculator</h2>
+              <p style="color: var(--text-secondary);">
+                Select your travel group type to recalculate realistic mock estimates for accommodation, meals, fuel, and activities.
+              </p>
+            </div>
+
+            <!-- Traveler Type Selector -->
+            <div class="budget-traveler-picker" role="group" aria-label="Select traveler type for budget calculation">
+              <button type="button" class="budget-traveler-btn" data-type="solo">👤 Solo Traveler</button>
+              <button type="button" class="budget-traveler-btn active" data-type="couple">👫 Couple (2 People)</button>
+              <button type="button" class="budget-traveler-btn" data-type="friends">👥 Friends (3–4)</button>
+              <button type="button" class="budget-traveler-btn" data-type="family">👨‍👩‍👧‍👦 Family</button>
+            </div>
+
+            <div id="budget-breakdown-container"></div>
+          </div>
+
+          <!-- Tab 4: Reviews -->
+          <div class="tab-panel" id="tab-panel-reviews">
+            <div style="margin-bottom: var(--space-6);">
+              <h2>What Recent Travelers Say</h2>
+              <p style="color: var(--text-secondary);">
+                Verified feedback from weekend explorers who followed this exact itinerary.
+              </p>
+            </div>
+            <div id="reviews-container"></div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Sticky Booking / Action Sidebar -->
+        <aside class="detail-sidebar" aria-label="Trip planning actions">
+          <div class="sidebar-card">
+            <div class="sidebar-price-row">
+              <div>
+                <span style="font-size: var(--fs-caption); text-transform: uppercase; color: var(--text-muted); display: block;">Total Trip Estimate</span>
+                <span class="sidebar-amount" id="sidebar-price-total">₹0</span>
+              </div>
+              <span style="font-size: var(--fs-caption); color: var(--text-secondary);">All-inclusive mock</span>
+            </div>
+
+            <div class="sidebar-actions">
+              <button type="button" class="btn btn-primary btn-mock-book" style="width: 100%;">
+                ⚡ Plan & Book This Trip
+              </button>
+              <button type="button" class="btn btn-outline fav-btn" id="btn-sidebar-save" style="width: 100%;">
+                🤍 Save Trip Plan
+              </button>
+              <button type="button" class="btn btn-ghost btn-share-trip" style="width: 100%;">
+                📤 Share With Friends
+              </button>
+            </div>
+
+            <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border-default); font-size: var(--fs-caption); color: var(--text-muted); text-align: center;">
+              🔒 100% Mock demonstration. No real payments or credit cards required.
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <span>&copy; 2026 ESCAPE — Weekend Trip Planner. All rights reserved.</span>
+        <a href="index.html" style="color: var(--accent-primary);">← Back to Homepage</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/destination.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      DestinationController.init();
+    });
+  </script>
+</body>
+</html>
